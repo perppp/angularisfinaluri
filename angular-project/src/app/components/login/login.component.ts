@@ -30,13 +30,21 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe({
         next: (response: any) => {
-          this.authService.saveToken(response.access_token);
-          this.router.navigate(['/dashboard']);
+          if (response && response.access_token) {
+            // Ensure the response contains a token
+            this.authService.saveToken(response.access_token);
+            console.log('Login successful, token saved:', response.access_token);
+            this.router.navigate(['/dashboard']); // Navigate to the dashboard
+          } else {
+            console.error('No token received in response:', response);
+          }
         },
         error: (err) => {
           console.error('Login failed:', err);
         },
       });
+    } else {
+      console.error('Form is invalid');
     }
   }
 }
