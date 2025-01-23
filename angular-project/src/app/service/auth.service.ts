@@ -4,13 +4,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root',  // Ensure it's provided in the root
 })
 export class AuthService {
   private authStatus = new BehaviorSubject<boolean>(false);
   private tokenKey = 'auth-token';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {}  // Inject HttpClient correctly
 
   // Login method
   login(credentials: { email: string; password: string }): Observable<any> {
