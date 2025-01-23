@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule], // Add ReactiveFormsModule here
+  imports: [CommonModule, ReactiveFormsModule], // Ensure ReactiveFormsModule is imported
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'], // Note: Corrected styleUrls
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   registerForm: FormGroup;
@@ -30,13 +30,16 @@ export class RegisterComponent {
   onRegister() {
     if (this.registerForm.valid) {
       this.authService.register(this.registerForm.value).subscribe({
-        next: () => {
-          this.router.navigate(['/login']);
+        next: (response) => {
+          console.log('Registration successful', response); // Debugging
+          this.router.navigate(['/login']); // Redirect after registration
         },
         error: (err) => {
-          console.error('Registration failed:', err);
+          console.error('Registration failed:', err); // Error handling
         },
       });
+    } else {
+      console.error('Form is invalid'); // Additional form validation error
     }
   }
 }
