@@ -1,1 +1,14 @@
-<p>dashboard works!</p>
+<div *ngIf="userRole === 'admin'">
+    <button (click)="goToUserManagement()">User Management</button>
+    <button (click)="goToReports()">View Reports</button>
+  </div>
+  
+  <div *ngIf="userRole === 'customer'">
+    <button (click)="viewGroups()">View Groups</button>
+    <button (click)="viewSessions()">View Sessions</button>
+  </div>
+  
+  <div *ngIf="userRole === ''">
+    <p>Welcome to your dashboard! Please log in.</p>
+  </div>
+  

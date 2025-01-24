@@ -10,6 +10,7 @@ import { jwtDecode } from 'jwt-decode';
 export class AuthService {
   private authStatus = new BehaviorSubject<boolean>(this.isLoggedIn());
   private tokenKey = 'auth-token';
+  private userRoleKey = 'user-role'; // Added role storage key
 
   constructor(private http: HttpClient) {}
 
@@ -33,9 +34,10 @@ export class AuthService {
     );
   }
 
-  // Save JWT Token
-  saveToken(token: string): void {
+  // Save JWT Token and User Role
+  saveToken(token: string, role: string): void {
     localStorage.setItem(this.tokenKey, token);
+    localStorage.setItem(this.userRoleKey, role); // Save user role
     this.authStatus.next(true); // Update auth status when token is saved
   }
 
@@ -44,9 +46,15 @@ export class AuthService {
     return !!localStorage.getItem(this.tokenKey); // Return true if token exists
   }
 
+  // Get the user role from localStorage
+  getUserRole(): string {
+    return localStorage.getItem(this.userRoleKey) || ''; // Return the user role or empty string if not found
+  }
+
   // Logout method
   logout(): void {
     localStorage.removeItem(this.tokenKey); // Remove token
+    localStorage.removeItem(this.userRoleKey); // Remove role
     this.authStatus.next(false); // Update auth status when logged out
   }
 

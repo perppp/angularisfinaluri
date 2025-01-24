@@ -38,9 +38,9 @@ export class RegisterComponent {
     if (this.registerForm.invalid) {
       return;
     }
-
+  
     this.isSubmitting = true;
-
+  
     try {
       const registerData = {
         name: this.registerForm.value.name,
@@ -51,12 +51,12 @@ export class RegisterComponent {
         updatedAt: new Date().toISOString(),
         role: 'customer',
       };
-
+  
       const registerResponse = await this.authService.register(registerData).toPromise();
-
+  
       // Log the API response for debugging
       console.log('Register response:', registerResponse);
-
+  
       if (registerResponse && registerResponse.id) {
         // If the registration response has an ID, consider it successful
         const loginResponse = await this.authService
@@ -65,9 +65,9 @@ export class RegisterComponent {
             password: this.registerForm.value.password,
           })
           .toPromise();
-
+  
         if (loginResponse && loginResponse.access_token) {
-          this.authService.saveToken(loginResponse.access_token);
+          this.authService.saveToken(loginResponse.access_token, 'customer'); // Save the token and role
           this.router.navigate(['/dashboard']);
         } else {
           this.errorMessage = 'Login failed after registration: No token received';
@@ -79,10 +79,16 @@ export class RegisterComponent {
         console.error(this.errorMessage);
         alert(this.errorMessage);
       }
-    } catch (err: any) {
-      // Now we can safely access 'err' as 'any'
+    } catch (err: unknown) {  // Catch errors as 'unknown'
       console.error('Registration failed:', err);
-      this.errorMessage = err?.message || 'An error occurred during registration.';
+  
+      // Type assertion to 'any' to handle the error safely
+      if (err instanceof Error) {
+        this.errorMessage = err.message || 'An error occurred during registration.';
+      } else {
+        this.errorMessage = 'An unknown error occurred during registration.';
+      }
+  
       alert(this.errorMessage);
     } finally {
       this.isSubmitting = false;
