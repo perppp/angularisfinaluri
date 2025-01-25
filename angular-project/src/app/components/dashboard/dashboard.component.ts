@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../service/auth.service';
+import { TaskService } from '../../service/task.service'; // Import TaskService
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,31 +11,45 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  userRole: string = ''; // Will be set from AuthService
+  tasks: any[] = []; // Array to hold tasks
+  report: any = {};  // To hold report data
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private taskService: TaskService // Inject TaskService
+  ) {}
 
   ngOnInit(): void {
-    this.userRole = this.authService.getUserRole(); // Get the user role from AuthService
+    this.loadTasks(); // Load tasks on component initialization
+    this.generateReport(); // Generate report on component initialization
   }
 
-  // Navigate to user management page
-  goToUserManagement() {
-    this.router.navigate(['/user-management']);
+  // Fetch tasks from the TaskService
+  loadTasks() {
+    this.taskService.getTasks().subscribe(
+      (tasks) => {
+        this.tasks = tasks;
+      },
+      (error) => {
+        console.error('Error loading tasks', error);
+      }
+    );
+  }
+
+  // Generate report from the TaskService
+  generateReport() {
+    this.taskService.generateReport().subscribe(
+      (report) => {
+        this.report = report;
+      },
+      (error) => {
+        console.error('Error generating report', error);
+      }
+    );
   }
 
   // Navigate to reports page
   goToReports() {
     this.router.navigate(['/reports']);
-  }
-
-  // Navigate to groups page
-  viewGroups() {
-    this.router.navigate(['/groups']);
-  }
-
-  // Navigate to sessions page
-  viewSessions() {
-    this.router.navigate(['/sessions']);
   }
 }
