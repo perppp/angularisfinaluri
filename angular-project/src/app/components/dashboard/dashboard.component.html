@@ -1,14 +1,25 @@
-<div *ngIf="userRole === 'admin'">
-    <button (click)="goToUserManagement()">User Management</button>
-    <button (click)="goToReports()">View Reports</button>
+<div class="dashboard">
+  <h2>Welcome to the Dashboard</h2>
+
+  <div *ngIf="tasks.length > 0; else noTasks">
+    <h3>Your Tasks</h3>
+    <ul>
+      <li *ngFor="let task of tasks">
+        <div class="task-card">
+          <p><strong>{{ task.title }}</strong></p>
+          <p>{{ task.description }}</p>
+          <p><strong>Status:</strong> {{ task.status }}</p>
+          <p><strong>Priority:</strong> {{ task.priority }}</p>
+          <p><strong>Due Date:</strong> {{ task.dueDate }}</p>
+          <p><strong>Assignee:</strong> {{ task.assignee }}</p>
+        </div>
+      </li>
+    </ul>
   </div>
-  
-  <div *ngIf="userRole === 'customer'">
-    <button (click)="viewGroups()">View Groups</button>
-    <button (click)="viewSessions()">View Sessions</button>
-  </div>
-  
-  <div *ngIf="userRole === ''">
-    <p>Welcome to your dashboard! Please log in.</p>
-  </div>
-  
+
+  <ng-template #noTasks>
+    <p>No tasks available.</p>
+  </ng-template>
+
+  <button (click)="goToReports()">Go to Reports</button>
+</div>
