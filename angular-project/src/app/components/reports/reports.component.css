@@ -1,0 +1,105 @@
+/* Reports container */
+.reports {
+    padding: 30px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    max-width: 1200px;
+    margin: 30px auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header Styling */
+  h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Section titles */
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #007bff;
+    font-weight: 600;
+  }
+  
+  /* Card-like summary boxes */
+  .task-summary, .task-priority, .task-status, .graph {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  /* Hover effect for cards */
+  .task-summary:hover, .task-priority:hover, .task-status:hover, .graph:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Task summary text */
+  .task-summary p, .task-priority p, .task-status p {
+    margin: 8px 0;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  /* Priority and Status breakdown labels */
+  strong {
+    color: #007bff;
+    font-weight: 600;
+  }
+  
+  /* Graph section */
+  .graph {
+    background-image: linear-gradient(to right, #007bff, #0056b3);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  /* Button styling */
+  button {
+    display: inline-block;
+    margin: 20px auto;
+    padding: 12px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  /* Button hover effect */
+  button:hover {
+    background-color: #0056b3;
+    transform: translateY(-3px);
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .reports {
+      padding: 20px;
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+    }
+  
+    .task-summary, .task-priority, .task-status, .graph {
+      padding: 15px;
+    }
+  
+    button {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.1rem;
+    }
+  }
+  

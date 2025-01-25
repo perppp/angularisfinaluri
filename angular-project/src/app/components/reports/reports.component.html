@@ -1,1 +1,33 @@
-<p>reports works!</p>
+<div class="reports">
+    <h2>Reports Overview</h2>
+    
+    <h3>Task Summary</h3>
+    <div class="task-summary" *ngIf="report.totalTasks">
+      <p><strong>Total Tasks:</strong> {{ report.totalTasks }}</p>
+      <p><strong>Completed Tasks:</strong> {{ report.completedTasks }}</p>
+      <p><strong>Pending Tasks:</strong> {{ report.pendingTasks }}</p>
+    </div>
+  
+    <h3>Task Progress Graph</h3>
+    <div class="graph" *ngIf="report.totalTasks">
+      <p>Graph Placeholder: Task Progress (In Progress: {{ report.tasksByStatus.inProgress }}%, Completed: {{ report.tasksByStatus.completed }}%, Pending: {{ report.tasksByStatus.pending }}%)</p>
+    </div>
+  
+    <h3>Task Breakdown by Priority</h3>
+    <div class="task-priority">
+      <p>High: {{ report.tasksByPriority.high }}</p>
+      <p>Medium: {{ report.tasksByPriority.medium }}</p>
+      <p>Low: {{ report.tasksByPriority.low }}</p>
+    </div>
+  
+    <h3>Task Breakdown by Status</h3>
+    <div class="task-status">
+      <p>Not Started: {{ report.tasksByStatus.notStarted }}</p>
+      <p>In Progress: {{ report.tasksByStatus.inProgress }}</p>
+      <p>Pending: {{ report.tasksByStatus.pending }}</p>
+      <p>Completed: {{ report.tasksByStatus.completed }}</p>
+    </div>
+  
+    <button (click)="goBack()">Back to Dashboard</button>
+  </div>
+  
