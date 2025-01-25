@@ -1,0 +1,93 @@
+/* General dashboard styles */
+.dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Grid layout for tasks */
+  ul {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Grid with responsive columns */
+    gap: 20px; /* Space between grid items */
+  }
+  
+  .task-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .task-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .task-card p {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  /* Strong text for headers in task card */
+  .task-card strong {
+    color: #007bff;
+    font-weight: 600;
+  }
+  
+  /* No tasks message styles */
+  ng-template {
+    text-align: center;
+    font-style: italic;
+    color: #999;
+  }
+  
+  /* Button styles */
+  button {
+    padding: 12px 25px;
+    margin: 20px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+    .dashboard {
+      padding: 15px;
+    }
+  
+    h2 {
+      font-size: 1.5rem;
+    }
+  
+    .task-card {
+      padding: 15px;
+    }
+  
+    button {
+      width: 100%;
+      padding: 15px;
+    }
+  }
+  
